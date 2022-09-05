@@ -1,24 +1,48 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
+import Home from './pages/home/Home';
+import Result from './pages/result/result';
+import Start from './pages/start/Start';
+import VraagDrie from './pages/vraagDrie/VraagDrie';
+import VraagEen from './pages/vraagEen/VraagEen';
+import VraagTwee from './pages/vraagTwee/VraagTwee';
+import VraagVier from './pages/vraagVier/VraagVier';
+import VraagVijf from './pages/vraagVijf/VraagVijf';
+import VraagZes from './pages/vraagZes/VraagZes';
+import VraagZeven from './pages/vraagZeven/VraagZeven';
+
+export const ScoreContext = React.createContext({
+  score: 0,
+  setScore: {} as any
+});
 
 function App() {
+  const [score, setScore] = useState(0)
+  const value = { score, setScore};
+
+ 
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <header></header>
+      <main>
+        <ScoreContext.Provider value={value}>
+          <Routes>
+            <Route path='/' element={<Home />}></Route>
+            <Route path='/start' element={<Start />}></Route>
+            <Route path='/vraag-een' element={<VraagEen />}></Route>
+            <Route path='/vraag-twee' element={<VraagTwee />}></Route>
+            <Route path='/vraag-drie' element={<VraagDrie />}></Route>
+            <Route path='/vraag-vier' element={<VraagVier />}></Route>
+            <Route path='/vraag-vijf' element={<VraagVijf />}></Route>
+            <Route path='/vraag-zes' element={<VraagZes />}></Route>
+            <Route path='/vraag-zeven' element={<VraagZeven />}></Route>
+            <Route path='/result' element={<Result />}></Route>
+          </Routes>
+        </ScoreContext.Provider>
+      </main>
+      <footer></footer>
     </div>
   );
 }
